@@ -15,11 +15,11 @@ function shoeInventory(name, productCode, quantity, valuePerItem){
 }
 
 //create shoes 
-let shoe1 = new shoeInventory('Nike', '149', 150, 109.99);
-let shoe2 = new shoeInventory('Adidas', '9388', 200, 98.89);
-let shoe3 = new shoeInventory('Puma', '2443', 120, 67.50);
-let shoe4 = new shoeInventory('Converse', '239', 135, 45.50);
-let shoe5 = new shoeInventory('Dune', '4550', 40, 120.50);
+let shoe1 = new shoeInventory('Nike', 149, 150, 109.99);
+let shoe2 = new shoeInventory('Adidas', 9388, 200, 98.89);
+let shoe3 = new shoeInventory('Puma', 2443, 120, 67.50);
+let shoe4 = new shoeInventory('Converse', 239, 135, 45.50);
+let shoe5 = new shoeInventory('Dune', 4550, 40, 120.50);
 
 
 //add shoes to array
@@ -58,20 +58,27 @@ function maximumShoeValue(array){
 
 function updateValue(shoeName, valueToUpdate, newValue){
    let itemToUpdate = shoeArray.findIndex((shoeInstance => shoeInstance.name == shoeName ));
-   //let index = shoeArray.indexOf(valueToUpdate)
    shoeArray[itemToUpdate][valueToUpdate] = newValue;
-   console.log(shoeArray[itemToUpdate])
+   console.log(`${shoeName} has been updated, ${valueToUpdate} is now ${newValue}`)
+   console.table(shoeArray[itemToUpdate])
    return
 }
 
 
 
 
-//function to order all objects in ascending order
+//function to order all objects in ascending order - sort in order of productCode, quantity, or valuePerItem
+
+function sortShoes(arrayToSort, valueToSort){
+   let sortedArray = arrayToSort.sort((a, b) => a[valueToSort] - b[valueToSort])
+   console.table(sortedArray)
+}
+
 
 
 
 console.log(shoeSearch('Adidas'))
-console.log(minimumShoeValue(shoeArray))
-console.log(maximumShoeValue(shoeArray))
+console.table(minimumShoeValue(shoeArray))
+console.table(maximumShoeValue(shoeArray))
 console.log(updateValue('Nike', 'valuePerItem', 108.50))
+console.log(sortShoes(shoeArray, 'quantity'))
